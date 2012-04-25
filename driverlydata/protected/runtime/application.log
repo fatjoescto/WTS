@@ -1,0 +1,34 @@
+2012/04/05 19:38:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yiiroot/framework/web/CWebApplication.php:280
+Stack trace:
+#0 /var/www/yiiroot/framework/web/CWebApplication.php(135): CWebApplication->runController('gii')
+#1 /var/www/yiiroot/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /var/www/driverlydata/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/driverlydata/index.php?r=gii
+---
+2012/04/05 19:45:40 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'driverly_dev.Warranty' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Warranty`.
+in /var/www/driverlydata/index.php (13)
+2012/04/05 19:51:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Messages".' in /var/www/yiiroot/framework/web/CWebApplication.php:280
+Stack trace:
+#0 /var/www/yiiroot/framework/web/CWebApplication.php(135): CWebApplication->runController('Messages')
+#1 /var/www/yiiroot/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /var/www/driverlydata/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/driverlydata/index.php?r=Messages
+---
+2012/04/17 14:43:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "facebookusers".' in /var/www/yiiroot/framework/web/CWebApplication.php:280
+Stack trace:
+#0 /var/www/yiiroot/framework/web/CWebApplication.php(135): CWebApplication->runController('facebookusers')
+#1 /var/www/yiiroot/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /var/www/driverlydata/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/driverlydata/index.php?r=facebookusers
+---
+2012/04/18 15:35:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ZipData".' in /var/www/yiiroot/framework/web/CWebApplication.php:280
+Stack trace:
+#0 /var/www/yiiroot/framework/web/CWebApplication.php(135): CWebApplication->runController('ZipData')
+#1 /var/www/yiiroot/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /var/www/driverlydata/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/driverlydata/index.php?r=ZipData
+---
