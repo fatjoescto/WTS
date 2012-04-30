@@ -1,0 +1,71 @@
+2012/04/05 19:38:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /var/www/yiiroot/framework/web/CWebApplication.php:280
+Stack trace:
+#0 /var/www/yiiroot/framework/web/CWebApplication.php(135): CWebApplication->runController('gii')
+#1 /var/www/yiiroot/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /var/www/driverlydata/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/driverlydata/index.php?r=gii
+---
+2012/04/05 19:45:40 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'driverly_dev.Warranty' doesn't exist. The SQL statement executed was: SHOW COLUMNS FROM `Warranty`.
+in /var/www/driverlydata/index.php (13)
+2012/04/05 19:51:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Messages".' in /var/www/yiiroot/framework/web/CWebApplication.php:280
+Stack trace:
+#0 /var/www/yiiroot/framework/web/CWebApplication.php(135): CWebApplication->runController('Messages')
+#1 /var/www/yiiroot/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /var/www/driverlydata/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/driverlydata/index.php?r=Messages
+---
+2012/04/17 14:43:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "facebookusers".' in /var/www/yiiroot/framework/web/CWebApplication.php:280
+Stack trace:
+#0 /var/www/yiiroot/framework/web/CWebApplication.php(135): CWebApplication->runController('facebookusers')
+#1 /var/www/yiiroot/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /var/www/driverlydata/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/driverlydata/index.php?r=facebookusers
+---
+2012/04/18 15:35:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ZipData".' in /var/www/yiiroot/framework/web/CWebApplication.php:280
+Stack trace:
+#0 /var/www/yiiroot/framework/web/CWebApplication.php(135): CWebApplication->runController('ZipData')
+#1 /var/www/yiiroot/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#2 /var/www/driverlydata/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/driverlydata/index.php?r=ZipData
+---
+2012/04/30 12:34:50 [error] [exception.CException] exception 'CException' with message 'Property "CNumberValidator.decimalOnly" is not defined.' in /var/www/yiiroot/framework/base/CComponent.php:174
+Stack trace:
+#0 /var/www/yiiroot/framework/validators/CValidator.php(174): CComponent->__set('decimalOnly', true)
+#1 /var/www/yiiroot/framework/base/CModel.php(285): CValidator::createValidator('numerical', Object(AverageFuelPrice), 'average_fuel_pr...', Array)
+#2 /var/www/yiiroot/framework/base/CModel.php(259): CModel->createValidators()
+#3 /var/www/yiiroot/framework/base/CModel.php(302): CModel->getValidators('state')
+#4 /var/www/yiiroot/framework/web/helpers/CHtml.php(1185): CModel->isAttributeRequired('state')
+#5 /var/www/yiiroot/framework/web/widgets/CActiveForm.php(560): CHtml::activeLabelEx(Object(AverageFuelPrice), 'state', Array)
+#6 /var/www/driverlydata/protected/views/averageFuelPrice/_form.php(13): CActiveForm->labelEx(Object(AverageFuelPrice), 'state')
+#7 /var/www/yiiroot/framework/web/CBaseController.php(127): require('/var/www/driver...')
+#8 /var/www/yiiroot/framework/web/CBaseController.php(96): CBaseController->renderInternal('/var/www/driver...', Array, true)
+#9 /var/www/yiiroot/framework/web/CController.php(870): CBaseController->renderFile('/var/www/driver...', Array, true)
+#10 /var/www/driverlydata/protected/views/averageFuelPrice/update.php(18): CController->renderPartial('_form', Array)
+#11 /var/www/yiiroot/framework/web/CBaseController.php(127): require('/var/www/driver...')
+#12 /var/www/yiiroot/framework/web/CBaseController.php(96): CBaseController->renderInternal('/var/www/driver...', Array, true)
+#13 /var/www/yiiroot/framework/web/CController.php(870): CBaseController->renderFile('/var/www/driver...', Array, true)
+#14 /var/www/yiiroot/framework/web/CController.php(783): CController->renderPartial('update', Array, true)
+#15 /var/www/driverlydata/protected/controllers/AverageFuelPriceController.php(102): CController->render('update', Array)
+#16 [internal function]: AverageFuelPriceController->actionUpdate('1')
+#17 /var/www/yiiroot/framework/web/actions/CAction.php(107): ReflectionMethod->invokeArgs(Object(AverageFuelPriceController), Array)
+#18 /var/www/yiiroot/framework/web/actions/CInlineAction.php(48): CAction->runWithParamsInternal(Object(AverageFuelPriceController), Object(ReflectionMethod), Array)
+#19 /var/www/yiiroot/framework/web/CController.php(309): CInlineAction->runWithParams(Array)
+#20 /var/www/yiiroot/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#21 /var/www/yiiroot/framework/web/filters/CFilter.php(41): CFilterChain->run()
+#22 /var/www/yiiroot/framework/web/CController.php(1146): CFilter->filter(Object(CFilterChain))
+#23 /var/www/yiiroot/framework/web/filters/CInlineFilter.php(59): CController->filterAccessControl(Object(CFilterChain))
+#24 /var/www/yiiroot/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#25 /var/www/yiiroot/framework/web/CController.php(292): CFilterChain->run()
+#26 /var/www/yiiroot/framework/web/CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 /var/www/yiiroot/framework/web/CWebApplication.php(276): CController->run('update')
+#28 /var/www/yiiroot/framework/web/CWebApplication.php(135): CWebApplication->runController('averageFuelPric...')
+#29 /var/www/yiiroot/framework/base/CApplication.php(162): CWebApplication->processRequest()
+#30 /var/www/driverlydata/index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/driverlydata/index.php?r=averageFuelPrice/update&id=1
+HTTP_REFERER=http://www.driverly.com/driverlydata/index.php?r=averageFuelPrice/view&id=1
+---
