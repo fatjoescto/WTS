@@ -34,8 +34,8 @@ function columnFromCondition($condstr) {
 
 
 
-$row;
-$col;
+//$row;
+//$col;
 
 function adjustRateByDifference($rate,$depmileage,$actmileage) {
 	global $dbg;
@@ -96,10 +96,31 @@ function calcDepreciationValues() {
 // Now we kick off the Depreciation calculations
 calcDepreciationValues();
 ?>
+
 <?php
-// Now we kick off the loan calculations
-/////   FIX DIS MON! calculateLoanValues();
+$zipcode = intval($_GET['zipcode']);
+function getLocalAreaInfoByZipCode($zipcode){
+$zipcode = intval($_GET['zipcode']);
+mysql_connect("localhost", "root", "G0dIsGreat") or die(mysql_error());
+mysql_select_db("driverly_dev") or die(mysql_error());
+$result = mysql_query("SELECT s.State, s.isTireTough, s.is4x4, s.isConvertible, s.latitude, s.longitude, f.average_fuel_price FROM driverly_dev.zipdata s, tbl_average_fuel_price f WHERE s.state=f.state AND s.zipcode=" . intval($_GET['zipcode']) );
+/////$result = mysql_query("SELECT s.State, s.isTireTough, s.is4x4, s.isConvertible, s.latitude, s.longitude, f.state, f.average_fuel_price FROM driverly_dev.zipdata s, driverly_dev.tbl_average_fuel_price f WHERE s.zipcode=". $_GET['ZipCode']. "AND f.state = s.State");
+$rows = mysql_fetch_array( $result );
+$rows.join();
+global $averagestategasprice;
+$averagestategasprice=$rows[6];
+}
 ?>
+<?php
+$zipcode = intval($_GET['ZipCode']);
+getLocalAreaInfoByZipCode($zipcode);
+?>
+<script type="text/javascript">
+var localgasprice='sdfsdf';
+//alert(localgasprice);
+//alert(<?php echo intval($_GET['zipcode'])?> );
+</script>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="ie ie6 lte9 lte8 lte7" lang="en"> <![endif]-->
 <!--[if IE 7]> <html class="ie ie7 lte9 lte8 lte7" lang="en"> <![endif]-->
@@ -151,14 +172,14 @@ calcDepreciationValues();
 //Define year1 year 2-5 and year6 on depreciation rates.
 //
 		var year1DepPercent = initVal * .0168;
-	        var year2to5DepPercent = initVal * .086;
-	        var year6OnDepPercent = initVal * .05;
+	        var year2to5DepPercent = initVal * .0086;
+	        var year6OnDepPercent = initVal * .005;
 //
 // Define burn comparison based upon year1 year2-5 year6 on
 		var burnCompare =0;
                 if ( vehicleAge>=0 && vehicleAge<=1)
                         burnCompare=year1DepPercent;
-                else if( vehicleAge>=5 )
+                else if( vehicleAge>=2 && vehicleAge<=5)
                         burnCompare=year2to5DepPercent;
                 else
                         burnCompare=year6OnDepPercent;
@@ -184,7 +205,7 @@ calcDepreciationValues();
 		if( burnRate>0 )
 		{
 			document.getElementById("lossamt").innerHTML="Losing $" + burnRate + " per month";
-			if( burnRate < 240 ) {
+			if( burnCompare > burnRate ) {
 				document.getElementById("redlight").className="your-result-lights hold";
 				document.getElementById("redlight2").className="result-lights hold";
 				document.getElementById("depmsg").innerHTML="Your vehicle is depreciating <br/>slower than average";
@@ -281,7 +302,8 @@ calcDepreciationValues();
       function buildRecommendations() {
 		var arr=new Array();
 		var fbf = <?php echo $_GET["fbf"] ?>;
-		var pwnership_month= <?php if( $_GET["purchmonth"] ) echo $_GET["purchmonth"]; else echo '0'; ?>;
+		var postal_code = <?php echo $_GET["zipcode"] ?>;
+		var ownership_month= <?php if( $_GET["purchmonth"] ) echo $_GET["purchmonth"]; else echo '0'; ?>;
 		var ownership_year= <?php if( $_GET["purchyear"] ) echo $_GET["purchyear"]; else echo '0'; ?>;
 		var financing_length= <?php if( $_GET["finleng"] ) echo $_GET["finleng"]; else echo '0'; ?>;
 		var amount_financed= <?php if( $_GET["finamt"] ) echo $_GET["finamt"]; else echo '0'; ?>;
@@ -297,6 +319,14 @@ calcDepreciationValues();
 	        var year1DepPercent = msrp * .0168;
 	        var year2to5DepPercent = msrp * .086;
 	        var year6OnDepPercent = msrp * .05;
+ 		var gpfc= <?php echo ($averagestategasprice)?>;
+		var nationalGasAverage = 3.809;
+/* The code here is for testing the gas price logic
+if (gpfc >= nationalGasAverage)
+	alert ('People in your state are paying $'+gpfc-nationalGasAverage+' more than the national average');
+if (gpfc <= nationalGasAverage)
+	alert ('Local gas price of $'+ gpfc +'is lower than the national average of $' + nationalGasAverage +'.');
+*/ 
 		if( isSelling ) {
 			if( mileage>=20000 && mileage<=30000 && msrp >=70000 && vehicleAge<=5)
 				arr.push('Sharp drop in value at 30,000 miles');
@@ -321,9 +351,9 @@ calcDepreciationValues();
 				arr.push('After 10 years this model becomes more difficult to finance');
 			if( msrp < 10000 && IsWinter())
 				arr.push('Less expensive models worth more during tax rebate season');
-			if( mpg<=25 )
+			if( mpg<=25 && (gpfc >= nationalGasAverage))
 				arr.push('Poor fuel economy less attractive while gas prices are high');
-			if( mpg>=26 )
+			if( mpg>=26 && (gpfc <= nationalGasAverage))
 				arr.push('Good fuel economy less attractive while gas prices are low');
 		} else {
 			
@@ -333,11 +363,15 @@ calcDepreciationValues();
 //	Convertible values lower in fall and winter
 //•	IF convertible and current month is September through February 
 
-			if( mpg<=25 )
+			if( mpg<=25 && (gpfc >= nationalGasAverage))
 				arr.push('Poor fuel economy less attractive while gas prices are high');
+			if( mpg<=25 && (gpfc <= nationalGasAverage))
 				arr.push('No rush to sell');
-			if( mpg>=26 )
+			if( mpg>=26 && (gpfc >= nationalGasAverage))
 				arr.push('Good fuel economy less attractive while gas prices are low');
+			if( mpg>=26 && (gpfc <= nationalGasAverage))
+				arr.push('Good fuel economy less attractive while gas prices are low');
+				arr.push('No rush to sell');
 
 						
 //	You’re currently underwater on your loan (owe more than car is worth)

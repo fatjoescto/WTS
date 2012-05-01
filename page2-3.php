@@ -28,6 +28,7 @@ if( intval($_POST["finalSubmit"])!=0 ) {
 		'&finleng=' . urlencode($_POST['financing_length']) .
 		'&purchmonth=' . urlencode($_POST['ownership_month']) .
 		'&purchyear=' . urlencode($_POST['ownership_year']) .
+		'&zipcode=' . urlencode($_POST['postal_code']) .
 		'&fbf=' . urlencode($_POST['v4x4']) .
 		'&mpg=' . urlencode($_POST['vmpg']) ) ;
   // check number is greater than 0 and $length digits long
@@ -130,7 +131,6 @@ function loadDescriptionByVin($vin) {
 $vdesc = "";
 $price = "";
 $stockImage="";
-
 $vinmake= "";
 $vinyear = "";
 $vinmodel = "";
