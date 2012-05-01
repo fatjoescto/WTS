@@ -321,15 +321,15 @@ var localgasprice='sdfsdf';
 	        var year6OnDepPercent = msrp * .05;
  		var gpfc= <?php echo ($averagestategasprice)?>;
 		var nationalGasAverage = 3.809;
-/* The code here is for testing the gas price logic
 if (gpfc >= nationalGasAverage)
-	alert ('People in your state are paying $'+gpfc-nationalGasAverage+' more than the national average');
+	alert ('Local gas price of $'+ gpfc +'is higher than the national average of $' + nationalGasAverage +'.');
 if (gpfc <= nationalGasAverage)
 	alert ('Local gas price of $'+ gpfc +'is lower than the national average of $' + nationalGasAverage +'.');
-*/ 
+		
 		if( isSelling ) {
 			if( mileage>=20000 && mileage<=30000 && msrp >=70000 && vehicleAge<=5)
 				arr.push('Sharp drop in value at 30,000 miles');
+			if( mileage>=20000 && mileage<=30000 && msrp >=70000 && vehicleAge<=5)
 				arr.push('Guard against depreciation with regular detailing');
 			if( mileage>=20000 && mileage<=30000 && msrp >=70000 && vehicleAge>=5)
 				arr.push('Sharp drop in value at 30,000 miles');
@@ -347,7 +347,7 @@ if (gpfc <= nationalGasAverage)
 	
 			if( vehicleAge > 5 && vehicleAge < 10)
 				arr.push('After 5 years this model becomes more difficult to finance');
-			if( year - vyear > 10 )
+			if( vehicleAge > 10 )
 				arr.push('After 10 years this model becomes more difficult to finance');
 			if( msrp < 10000 && IsWinter())
 				arr.push('Less expensive models worth more during tax rebate season');
@@ -368,9 +368,10 @@ if (gpfc <= nationalGasAverage)
 			if( mpg<=25 && (gpfc <= nationalGasAverage))
 				arr.push('No rush to sell');
 			if( mpg>=26 && (gpfc >= nationalGasAverage))
-				arr.push('Good fuel economy less attractive while gas prices are low');
+				arr.push('Good fuel economy more attractive while gas prices are high');
 			if( mpg>=26 && (gpfc <= nationalGasAverage))
 				arr.push('Good fuel economy less attractive while gas prices are low');
+			if( mpg>=26 && (gpfc <= nationalGasAverage))
 				arr.push('No rush to sell');
 
 						
